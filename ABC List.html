@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ABC List</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:#fbfbfc;
+    --card:#ffffff;
+    --muted:#93c78c;
+    --accent:#5b8def;
+    --accent-2:#68d391;
+    --danger:#f56565;
+    --shadow:0 6px 20px rgba(36,41,46,0.06);
+    --radius:30px;
+    font-family:'Fredoka', sans-serif;
+  }
+
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,#bad6ba 0%,var(--bg) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px;
+    color:#222;
+  }
+
+  .app{
+    width:760px;
+    max-width:96%;
+    background:var(--card);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+  }
+
+  header{
+    
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+    position:relative;
+  }
+
+  h1{
+    color: #416d49;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    margin:0;
+    font-size:28px;
+    letter-spacing:-0.4px;
+    opacity:0;
+    animation:fadeInHeader 1s ease forwards;
+  }
+
+  .sub{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:4px;
+    opacity:0;
+    animation:fadeInHeader 1s ease 0.3s forwards;
+  }
+
+  .header-left{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-bottom:250px; /* extra space so image won't overlap Add Task */
+  }
+
+  
+  .hero-img{
+    position:absolute;
+    top:70px;
+    right:40px;
+    width:250px;
+    height:auto;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    opacity:0;
+    animation:fadeInImage 1.2s ease forwards;
+    animation-delay:0.5s;
+  }
+
+  .composer{
+    
+    display:flex;
+    gap:8px;
+    margin:20px 0 18px;
+  }
+
+  .controls{
+    color: #416d49;
+  }
+
+  .completed-area
+  {
+    color: #416d49;
+  }
+
+  input[type="text"]{
+    flex:1;
+    padding:12px 14px;
+    border-radius:10px;
+    border:1px solid #eef2f6;
+    background:#fcfdff;
+    font-size:15px;
+    outline:none;
+    transition:box-shadow .15s, transform .06s;
+  }
+  input[type="text"]:focus{
+    box-shadow:0 0 0 4px rgba(91,141,239,0.08);
+    transform:translateY(-1px);
+  }
+
+  button.primary{
+    background:linear-gradient(180deg,#33b850);
+    color:rgb(255, 255, 255);
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow:0 6px 18px rgba(91, 239, 123, 0.18);
+  }
+  button.ghost{
+    color: #53745f;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 100;
+    background:transparent;
+    border:1px solid #eef2f6;
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
+  }
+
+  .controls{display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .stats{color:var(--muted);font-size:13px;margin-left:auto}
+
+  .task-list{display:grid;gap:8px}
+  .task{
+    color: #53745f;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 100;
+    display:flex;
+    gap:12px;
+    align-items:center;
+    padding:12px;
+    border-radius:10px;
+    border:0.5px solid #5b5e5e;
+    transition:transform .12s ease, box-shadow .12s, background .12s;
+    background:linear-gradient(180deg,hsl(210, 4%, 67%),rgba(250, 250, 250, 0.6));
+  }
+
+  .task:active{transform:scale(.997)}
+  .task.dragging{opacity:.6;transform:scale(.99);box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+
+  .checkbox{
+    width:36px;height:36px;min-width:36px;
+    border-radius:9px;
+    display:inline-grid;place-items:center;
+    background:#fff;border:1px solid #eef2f6;
+    cursor:pointer;transition:background .12s,transform .12s;
+  }
+  .checkbox.checked{
+    background:linear-gradient(180deg,#656b68);
+    border-color:transparent;
+    transform:translateY(-1px);
+  }
+
+  .task-content{flex:1;min-width:0}
+  .title{font-size:15px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .title.completed{color:var(--muted);text-decoration:line-through;opacity:.8}
+  .meta{font-size:12px;color:var(--muted);margin-top:4px}
+  .actions{display:flex;gap:6px;align-items:center}
+  .icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid transparent;background:transparent;display:grid;place-items:center;cursor:pointer}
+  .icon-btn:hover{background:#fbfbff;border-color:#eef2f6}
+
+  .completed-area{margin-top:14px;padding-top:10px;border-top:1px dashed #f3f6fa}
+  .focused{box-shadow:0 12px 28px rgba(80,120,200,0.06);border-color:rgba(91,141,239,0.14);transform:translateY(-3px)}
+
+  /* Animations */
+  @keyframes fadeInHeader{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes fadeInImage{
+    from{opacity:0;transform:translateY(-10px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  @media(max-width:420px){
+    .controls{gap:6px}
+    input[type="text"]{padding:10px}
+    .app{padding:16px}
+  }
+
+  body 
+  {
+    zoom: 1.15; /* Increase to 1.5 or 2 for a larger UI */
+  }
+
+</style>
+</head>
+
+
+<body>
+<main class="app" aria-live="polite">
+  <header>
+    <div class="header-left">
+      <h1>📝 A-B-C List</h1>
+      <div class="sub">Simple, focused to-do — no reminders, just clarity.</div>
+      <img src="todolist.jpg" alt="To-Do Illustration" class="hero-img">
+    </div>
+    <div class="header-right">
+      <button id="toggleFocus" class="ghost">Focus mode</button>
+      <button id="clearCompleted" class="ghost">Clear done</button>
+    </div>
+  </header>
+
+  <section class="composer" aria-label="Add task">
+    <input id="taskInput" type="text" placeholder="Add a task — press Enter to save" aria-label="New task" />
+    <button id="addBtn" class="primary">Add</button>
+  </section>
+
+  <div class="controls" role="toolbar">
+    <label class="muted tiny" id="taskCount">0 tasks</label>
+    <div class="stats muted tiny" id="stats"></div>
+  </div>
+
+  <section>
+    <div id="taskList" class="task-list" aria-label="Active tasks"></div>
+    <div id="completedArea" class="completed-area" aria-live="polite">
+      <div class="muted tiny" id="completedLabel">Completed</div>
+      <div id="completedList" class="task-list"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+const STORAGE_KEY='calmlist:v1';
+let tasks=[],focusMode=false,focusedTaskId=null;
+const q=id=>document.getElementById(id);
+const taskList=q('taskList'),completedList=q('completedList');
+const input=q('taskInput'),addBtn=q('addBtn'),toggleFocusBtn=q('toggleFocus'),clearCompletedBtn=q('clearCompleted');
+const taskCount=q('taskCount'),stats=q('stats'),completedLabel=q('completedLabel');
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function load(){try{const raw=localStorage.getItem(STORAGE_KEY);tasks=raw?JSON.parse(raw):[]}catch(e){tasks=[]}}
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));updateStats();}
+
+function updateStats()
+{
+  const total=tasks.length,done=tasks.filter(t=>t.done).length;
+  taskCount.textContent=`${total} task${total!==1?'s':''}`;
+  stats.textContent=`${total-done} active • ${done} done`;
+  completedLabel.style.display=done?'block':'none';
+}
+function createTaskElement(task)
+{
+  const el=document.createElement('div');
+  el.className='task fade-in';el.setAttribute('data-id',task.id);
+  const cb=document.createElement('button');
+  cb.className='checkbox'+(task.done?' checked':'');
+  cb.addEventListener('click',()=>toggleTask(task.id));
+  const content=document.createElement('div');content.className='task-content';
+  const title=document.createElement('p');title.className='title'+(task.done?' completed':'');title.textContent=task.text;
+  content.appendChild(title);
+  const meta=document.createElement('div');meta.className='meta muted tiny';meta.textContent=new Date(task.created).toLocaleString();content.appendChild(meta);
+  const actions=document.createElement('div');actions.className='actions';
+  const editBtn=document.createElement('button');editBtn.className='icon-btn';editBtn.textContent='✎';editBtn.addEventListener('click',()=>startEdit(task.id));
+  const delBtn=document.createElement('button');delBtn.className='icon-btn';delBtn.textContent='🗑';delBtn.addEventListener('click',()=>deleteTask(task.id));
+  actions.append(editBtn,delBtn);
+  el.append(cb,content,actions);
+
+  title.addEventListener('dblclick',()=>startEdit(task.id));
+  el.addEventListener('click',()=>{ if(focusMode) setFocus(task.id); });
+
+  if(focusMode && focusedTaskId===task.id) el.classList.add('focused');
+  return el;
+}
+function render()
+{
+  taskList.innerHTML='';completedList.innerHTML='';
+  const active=tasks.filter(t=>!t.done),done=tasks.filter(t=>t.done);
+  active.forEach(t=>taskList.appendChild(createTaskElement(t)));
+  done.forEach(t=>completedList.appendChild(createTaskElement(t)));
+  updateStats();
+}
+function addTask(text)
+{
+  if(!text.trim())return;
+  const task={id:uid(),text:text.trim(),done:false,created:Date.now()};
+  tasks.unshift(task);save();render();
+  input.value='';input.focus();
+  addBtn.animate([{transform:'translateY(0)'},{transform:'translateY(-3px)'},{transform:'translateY(0)'}],{duration:200});
+}
+function toggleTask(id)
+{
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+
+  const wasDone = t.done; // remember previous state
+  t.done = !t.done;       // toggle done/undone
+  save();
+  render();
+
+  // Play only when marking as completed
+  if (!wasDone && t.done) {
+    playClick();
+  }
+}
+
+function deleteTask(id){tasks=tasks.filter(x=>x.id!==id);save();render();}
+function startEdit(id)
+{
+  const task=tasks.find(t=>t.id===id);if(!task)return;
+  const el=document.querySelector(`[data-id="${id}"] .task-content`);
+  el.innerHTML='';const edit=document.createElement('input');edit.type='text';edit.value=task.text;edit.style.width='100%';
+  edit.addEventListener('keydown',e=>{if(e.key==='Enter')finishEdit(id,edit.value);if(e.key==='Escape')render();});
+  edit.addEventListener('blur',()=>finishEdit(id,edit.value));
+  el.appendChild(edit);edit.focus();edit.select();
+}
+function finishEdit(id,val){const t=tasks.find(x=>x.id===id);if(!t)return;t.text=val.trim()||t.text;save();render();}
+function toggleFocusMode()
+{
+  focusMode=!focusMode;
+  toggleFocusBtn.style.background=focusMode?'linear-gradient(180deg,var(--accent),#3f6fd6)':'';toggleFocusBtn.style.color=focusMode?'white':'';
+  toggleFocusBtn.textContent=focusMode?'Focus: ON':'Focus mode';
+  if(!focusMode) focusedTaskId=null;
+  render();
+}
+function setFocus(id)
+{
+  focusedTaskId=(focusedTaskId===id?null:id);
+  render();
+}
+function clearCompleted(){tasks=tasks.filter(t=>!t.done);save();render();}
+
+function playClick() 
+{
+  const audio = new Audio('bell.mp3');
+  audio.volume = 0.6; // 0.0 to 1.0
+  audio.play().catch(() => {
+    console.warn('Autoplay blocked — user interaction required first.');
+  });
+}
+
+addBtn.addEventListener('click',()=>addTask(input.value));
+input.addEventListener('keydown',e=>{if(e.key==='Enter')addTask(input.value)});
+toggleFocusBtn.addEventListener('click',toggleFocusMode);
+clearCompletedBtn.addEventListener('click',clearCompleted);
+load();render();
+
+</script>
+</body>
+</html>
