@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness Tracker — Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">Fitness Tracker 1.0</div>
+    <nav>
+      <a href="index.html" class="nav-link">Dashboard</a>
+      <a href="workouts.html" class="nav-link">Workouts</a>
+      <a href="profile.html" class="nav-link active">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Profile & Settings</h1>
+
+    <form id="profileForm" class="form-card">
+      <label>Full name
+        <input type="text" id="fullName" placeholder="Your name">
+      </label>
+
+      <label>Email
+        <input type="email" id="email" placeholder="you@example.com">
+      </label>
+
+      <label>Weekly Goal (hours)
+        <input type="number" id="weeklyGoal" min="0" value="3">
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Save Profile</button>
+      </div>
+    </form>
+
+    <img src="p4.jpg" alt="Fitness" class=" absolute-3">
+  </main>
+
+  <script src="profile.js" type="module"></script>
+</body>
+</html>

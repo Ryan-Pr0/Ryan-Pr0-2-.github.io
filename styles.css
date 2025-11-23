@@ -1,0 +1,245 @@
+:root{
+
+  --bg:#F5F7FA;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --radius:10px;
+  --shadow: 0 4px 14px rgba(17,24,39,0.06);
+  --glass: rgba(255,255,255,0.8);
+  font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background-image: url("bg4.avif");
+  background-size: 950px;
+  
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  background:var(--primary);
+  color:#fff;
+  font-size: 20px;
+}
+.brand{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: oblique;
+  color: #0e0f0f;
+  font-weight:600; 
+  font-size: 25px;
+}
+
+  .nav-link{
+  color:rgba(10, 9, 9, 0.9);
+  text-decoration:none;
+  margin-left:16px;
+  font-weight:600;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: oblique;
+  display: inline-block;
+  transition: transform 0.25s ease;
+ 
+ 
+}
+
+
+.nav-link.active{ 
+  color:rgba(10, 9, 9, 0.9);
+  text-decoration:underline; 
+  opacity:1 
+
+
+  
+}
+
+.container{
+  max-width:1000px;
+  margin:28px auto;
+  padding:0 16px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-style: oblique;
+  color: #0c0e0f;
+  
+}
+
+h1{
+  margin:0 0 18px 0
+  
+  
+}
+h2{
+  margin:0 0 12px 0; 
+  font-size:18px; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-style: oblique;
+  color: #0c0e0f;
+  
+}
+
+.stats-grid{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+  margin-bottom:18px;
+  
+}
+
+.stat-card{
+  background-color: hsla(180, 24%, 96%, 0.938);
+  padding:18px;
+  border-radius:var(--radius);
+  box-shadow: 0 0 50px rgba(15, 15, 15, 0.959);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+
+.stat-card:hover{
+  transform: scale(1.02);
+}
+
+
+.stat-number{font-size:22px; font-weight:700}
+.stat-label{color:var(--muted); margin-top:6px}
+
+.chart-card, .history-card, .form-card{
+  background-color: hsla(168, 24%, 96%, 0.938);
+  padding:16px;
+  margin-bottom:16px;
+  border-radius:var(--radius);
+  box-shadow: 0 0 50px rgba(10, 10, 10, 0.959);
+ 
+  
+}
+
+.chart-card{
+  color: #111827;
+  
+}
+
+.chart-card:hover, .history-card:hover
+{
+  transform: scale(1.01);
+}
+
+.workout-list{list-style:none; padding:0; margin:0}
+.workout-item{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px;
+  border-bottom:1px solid #eef2f7;
+}
+.workout-item:last-child{border-bottom:0}
+
+.form-card label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:600;
+}
+.form-card input[type="text"],
+.form-card input[type="number"],
+.form-card input[type="date"],
+.form-card input[type="email"]
+{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e6edf3;
+  margin-top:6px;
+  font-size:14px;
+}
+
+.form-card:hover
+{
+  transform: scale(1.01);
+}
+.form-actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+.btn{
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:white;
+  cursor:pointer;
+  font-weight:700;
+}
+.btn.primary{
+  background:white;
+  color:rgb(5, 5, 5);
+  border:0;
+}
+
+@media (max-width:640px){
+  .navbar{padding:12px}
+  .brand{font-size:16px}
+  .container{padding:0 12px}
+}
+
+.stat-label
+{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-style: oblique;
+  color: #0c0c0c;
+}
+
+.history-card{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  font-style: oblique;
+  color: #0b0b0c;
+  
+}
+
+/* Base image styling */
+img {
+  border-radius: 8px;
+  box-shadow: 0 0 20px white;
+  width: 400px;
+  height: 250px;
+}
+
+/* Absolute elements animation */
+.absolute-1,
+.absolute-2,
+.absolute-3 {
+  position: absolute;
+  top: 150px;
+  left: 50px;
+  opacity: 0;
+  transform: translateX(-150%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: slideInLeft 1s ease-out forwards;
+}
+
+
+/* Keyframes for slide-in */
+@keyframes slideInLeft {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+.nav-link:hover 
+{
+  transform: scale(1.1)
+  
+}

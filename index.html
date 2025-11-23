@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness Tracker — Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">Fitness Tracker 1.0</div>
+    <nav>
+      <a href="index.html" class="nav-link active">Dashboard</a>
+      <a href="workouts.html" class="nav-link">Workouts</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Dashboard</h1>
+
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" id="totalWorkouts">0</div>
+        <div class="stat-label">Total Workouts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="totalHours">0</div>
+        <div class="stat-label">Total Hours</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="avgReps">0</div>
+        <div class="stat-label">Avg Reps / Set</div>
+      </div>
+      
+    </section>
+
+    <section class="chart-card">
+      <h2>Workouts This Week</h2>
+      <canvas id="weekChart" height="120"></canvas>
+    </section>
+
+    <section class="history-card">
+      <h2>Recent Workouts</h2>
+      <ul id="recentList" class="workout-list"></ul>
+    </section>
+
+
+    <img src="p5.webp" alt="Fitness" class=" absolute-1">
+  </main>
+
+  <script src="dashboard.js" type="module"></script>
+</body>
+</html>

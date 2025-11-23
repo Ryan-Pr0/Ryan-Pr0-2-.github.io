@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness Tracker — Workouts</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">Fitness Tracker 1.0</div>
+    <nav>
+      <a href="index.html" class="nav-link">Dashboard</a>
+      <a href="workouts.html" class="nav-link active">Workouts</a>
+      <a href="profile.html" class="nav-link">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Log a Workout</h1>
+
+    <form id="workoutForm" class="form-card">
+      <label>Exercise
+        <input type="text" id="exercise" required placeholder="e.g., Bench Press">
+      </label>
+
+      <label>Sets
+        <input type="number" id="sets" required min="1" value="3">
+      </label>
+
+      <label>Reps per Set
+        <input type="number" id="reps" required min="1" value="8">
+      </label>
+
+      <label>Duration (minutes)
+        <input type="number" id="duration" required min="1" value="30">
+      </label>
+
+      <label>Date
+        <input type="date" id="date" required>
+      </label>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">Save Workout</button>
+        <button type="button" id="clearBtn" class="btn">Clear</button>
+      </div>
+    </form>
+
+    <section class="history-card">
+      <h2>Your Workouts</h2>
+      <ul id="workoutsList" class="workout-list"></ul>
+    </section>
+
+    <img src="p2.jpg" alt="Fitness" class=" absolute-2">
+
+  </main>
+
+  <script src="workouts.js" type="module"></script>
+</body>
+</html>
