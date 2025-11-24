@@ -207,6 +207,35 @@
   {
     zoom: 1.15; /* Increase to 1.5 or 2 for a larger UI */
   }
+  /* Fix hero image on mobile */
+@media (max-width: 600px) {
+
+  .header-left {
+    padding-bottom: 0; /* remove forced spacing */
+  }
+
+  .hero-img {
+    position: static;       /* remove absolute positioning */
+    width: 70%;             /* shrink image on small screens */
+    max-width: 220px;
+    margin: 10px auto 0;    /* center it */
+    display: block;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+}
+
 
 </style>
 </head>
@@ -363,3 +392,4 @@ load();render();
 </script>
 </body>
 </html>
+
