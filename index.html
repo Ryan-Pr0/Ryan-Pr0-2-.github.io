@@ -155,9 +155,9 @@
     align-items:center;
     padding:12px;
     border-radius:10px;
-    border:0.5px solid #5b5e5e;
+    box-shadow:0 6px 18px rgb(2, 2, 2);
     transition:transform .12s ease, box-shadow .12s, background .12s;
-    background:linear-gradient(180deg,hsl(210, 4%, 67%),rgba(250, 250, 250, 0.6));
+    background:linear-gradient(180deg,hsl(0, 0%, 99%),rgba(250, 250, 250, 0.6));
   }
 
   .task:active{transform:scale(.997)}
@@ -167,11 +167,11 @@
     width:36px;height:36px;min-width:36px;
     border-radius:9px;
     display:inline-grid;place-items:center;
-    background:#fff;border:1px solid #eef2f6;
+    background:#eaeeeb;border:1px solid #eef2f6;
     cursor:pointer;transition:background .12s,transform .12s;
   }
   .checkbox.checked{
-    background:linear-gradient(180deg,#656b68);
+    background:linear-gradient(180deg,#043f04);
     border-color:transparent;
     transform:translateY(-1px);
   }
@@ -207,35 +207,6 @@
   {
     zoom: 1.15; /* Increase to 1.5 or 2 for a larger UI */
   }
-  /* Fix hero image on mobile */
-@media (max-width: 600px) {
-
-  .header-left {
-    padding-bottom: 0; /* remove forced spacing */
-  }
-
-  .hero-img {
-    position: static;       /* remove absolute positioning */
-    width: 70%;             /* shrink image on small screens */
-    max-width: 220px;
-    margin: 10px auto 0;    /* center it */
-    display: block;
-  }
-
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .header-right {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 12px;
-  }
-}
-
 
 </style>
 </head>
@@ -362,7 +333,7 @@ function finishEdit(id,val){const t=tasks.find(x=>x.id===id);if(!t)return;t.text
 function toggleFocusMode()
 {
   focusMode=!focusMode;
-  toggleFocusBtn.style.background=focusMode?'linear-gradient(180deg,var(--accent),#3f6fd6)':'';toggleFocusBtn.style.color=focusMode?'white':'';
+  toggleFocusBtn.style.background=focusMode?'linear-gradient(180deg,var(--accent),#fcfffd)':'';toggleFocusBtn.style.color=focusMode?'white':'';
   toggleFocusBtn.textContent=focusMode?'Focus: ON':'Focus mode';
   if(!focusMode) focusedTaskId=null;
   render();
@@ -392,4 +363,3 @@ load();render();
 </script>
 </body>
 </html>
-
